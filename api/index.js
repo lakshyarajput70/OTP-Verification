@@ -4,7 +4,8 @@ const textflow = require("textflow.js")
 
 // G2i91EmmNRr6mzmAATzjhZJGzRN3N7gJHuJsfXjRyhsHLBq7Cu4zDki4ZT1YLsAQ
 
-textflow.useKey("G2i91EmmNRr6mzmAATzjhZJGzRN3N7gJHuJsfXjRyhsHLBq7Cu4zDki4ZT1YLsAQ")
+// K6re4KhmDu0HTK2hEfqqyXoC9TLvkO6dmlVolYw6sfY2yaJefrJbBKz0nMoVbwhh
+textflow.useKey("K6re4KhmDu0HTK2hEfqqyXoC9TLvkO6dmlVolYw6sfY2yaJefrJbBKz0nMoVbwhh")
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.post("/verification", async (req, res) => {
 })
 
 
-app.post("/sendOtp", async (req, res) => {
+app.post("/sendOTP", async (req, res) => {
     const { phoneNumber } = req.body
 
     var result = await textflow.sendVerificationSMS(phoneNumber);

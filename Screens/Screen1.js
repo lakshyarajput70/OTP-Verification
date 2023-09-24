@@ -7,7 +7,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Image,SafeAreaView , TouchableWithoutFeedback, Keyboard, Alert
+  Image,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
 
@@ -19,44 +23,40 @@ export default function Screen1() {
 
   const handleSubmit = () => {
     if (phoneNumber.length !== 10) {
-      // Alert.alert("Enter a valid phone number")
-      return ;
+      Alert.alert("Enter a valid phone number");
+      return;
     } else {
-      fetch("http://192.168.8.72:2000/sendOtp", {
+      // fetch("http://192.168.43.4:2000/sendOTP", {
+      fetch("http://192.168.8.72:2000/sendOTP", {
         method: "POST",
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            // phoneNumber
-            phoneNumber:formattedValue
+          phoneNumber: formattedValue,
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.success) {
+            navigation.navigate("Screen2", { phoneNumber: formattedValue });
+          } else {
+            Alert.alert("Error", "Could not Sent OTP");
+          }
         })
-    })
-        .then(res => res.json())
-        .then(json => {
-            if (json.success) {
-                navigation.navigate("Screen2", {phoneNumber:formattedValue})
-            }
-            else {
-                Alert.alert("Error", "Could not Sent OTP");
-            }
-         })
-        .catch(e => {
-            Alert.alert("Error", "Could not sign up");
-        })
-
+        .catch((e) => {
+          Alert.alert("Error", "Could not sign up");
+        });
     }
   };
 
-
-
   return (
-    // <View style={styles.container}>
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <KeyboardAvoidingView>
         <View
           style={{
+            marginTop: 100,
             flexDirection: "row",
             alignItems: "center",
             marginLeft: "auto",
@@ -128,7 +128,8 @@ export default function Screen1() {
         </View>
         <TouchableOpacity
           onPress={handleSubmit}
-          // onPress={()=>navigation.navigate("Screen2",{phoneNumber:phoneNumber})}
+          // onPress={()=>navigation.navigate("Screen2", { phoneNumber: formattedValue })}
+
           style={{
             width: 250,
             backgroundColor: "orange",
@@ -144,17 +145,16 @@ export default function Screen1() {
           </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-
-    </SafeAreaView>
-    // </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     backgroundColor: "white",
     margin: "auto",
+    alignItems: "center",
   },
 });

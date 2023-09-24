@@ -1,5 +1,6 @@
 import {
   Image,
+  KeyboardAvoidingView,
   Pressable,
   StyleSheet,
   Text,
@@ -11,6 +12,7 @@ import React from "react";
 const Screen3 = () => {
   return (
     <View style={styles.container}>
+      <KeyboardAvoidingView>
       <View
         style={{
           flexDirection: "row",
@@ -53,7 +55,7 @@ const Screen3 = () => {
           width: 200,
           backgroundColor: "orange",
           padding: 15,
-          marginTop: 100,
+          marginTop: 90,
           marginLeft: "auto",
           marginRight: "auto",
           borderRadius: 29,
@@ -74,6 +76,7 @@ const Screen3 = () => {
       >
         *This will only take 5 min
       </Text>
+      </KeyboardAvoidingView>
     </View>
   );
 };
